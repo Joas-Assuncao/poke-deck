@@ -32,7 +32,7 @@ export class PokeApiService {
       })
       .pipe(
         map((response) => {
-          return response.data;
+          return response.data.map((card) => ({ ...card, added: false}));
         })
       );
   }

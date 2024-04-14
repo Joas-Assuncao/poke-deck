@@ -1,27 +1,64 @@
-<igx-card elevated class="w-60 items-center">
-  <igx-card-media style="width: 180px;" *ngIf="card.images.small">
+<igx-card elevated class="max-w-60 w-full items-center bg-yellow-">
+  <igx-card-media
+    class="max-w-44 w-full p-4"
+    *ngIf="card && card.images && card.images.small"
+  >
     <img src="{{ card.images.small }}" />
   </igx-card-media>
   <igx-card-header>
     <a routerLink="/decks/:name" *ngIf="deck"></a>
-    <h3 igxCardHeaderTitle>{{ card.name || deck.name }}</h3>
-    <h5 igxCardHeaderSubtitle *ngIf="card.supertype">
+    <h3 igxCardHeaderTitle class="text-gray-200">
+      {{ card.name || deck.name }}
+    </h3>
+    <h5 igxCardHeaderSubtitle *ngIf="card.supertype" class="text-gray-200">
       Super-Tipo: {{ card.supertype }}
     </h5>
-    <h5 igxCardHeaderSubtitle *ngIf="card.types && card.types[0]">
-      Tipo: <span *ngFor="let type of card.types; let index">{{ type }}{{ (needComma(index, card.types.length)) ? ',' : '' }}</span>
+    <h5
+      igxCardHeaderSubtitle
+      *ngIf="card.types && card.types[0]"
+      class="text-gray-200"
+    >
+      Tipo:
+      <span *ngFor="let type of card.types; let index"
+        >{{ type }}{{ needComma(index, card.types.length) ? "," : "" }}</span
+      >
     </h5>
   </igx-card-header>
 
   <igx-card-content>
     <ng-template *ngIf="card.abilities && card.abilities[0]">
-      <p *ngFor="let abilitie of card.abilities; let index">
-        <strong>
-          {{ abilitie.name }} |
-          {{ abilitie.type }} :
-        </strong>
+      <p
+        *ngFor="let abilitie of card.abilities; let index"
+        class="text-gray-200"
+      >
+        <strong> {{ abilitie.name }} | {{ abilitie.type }} : </strong>
         {{ abilitie.text }}
       </p>
     </ng-template>
   </igx-card-content>
+
+  <igx-card-actions>
+    <button
+      *ngIf="!card.added"
+      igxButton
+      igxRipple
+      igxStart
+      [disabled]="!name || name.length < 1"
+      [igxButtonColor]="!name || name.length < 1 ? '#6b7280' : '#5DB9FF'"
+      (click)="saveCard(card)"
+      class="disabled:bg-yellow-950 disabled:text-gray-500"
+    >
+      Adicionar ao baralho
+    </button>
+    <button
+      *ngIf="card.added"
+      igxButton
+      igxRipple
+      igxStart
+      igxButtonColor="#FF1F1F"
+      (click)="removeCard(card)"
+    >
+      Remover do baralho
+    </button>
+  </igx-card-actions>
 </igx-card>

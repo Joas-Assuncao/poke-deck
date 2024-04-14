@@ -1,4 +1,76 @@
-/* You can add global styles to this file, and also import other style files */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:ng-deep :root {
+  --idle-text-color: #363b81;
+  --igx-input-group-idle-text-color: #363b81;
+  --input-prefix-color--focused: #363b81;
+  --igx-input-group-focused-border-color: #363b81;
+
+  --ig-primary-h: 235;
+  --ig-primary-s: 54%;
+  --ig-primary-l: 37%;
+  --ig-primary-a: 1;
+}
+
+igx-input-group label {
+  color: #FFE447 !important;
+}
+
+igx-input-group input {
+  color: #FFE447 !important;
+  font-weight: 600 !important;
+}
+
+igx-input-group > div::after {
+  border-block-end: 1px solid #FFE447 !important;
+}
+
+igx-input-group > div:hover::after {
+  border-block-end: 1px solid #FFE447 !important;
+}
+
+igx-input-group.igx-input-group--focused .igx-input-group__line {
+  background: #FFE447 !important;
+}
+
+div.custom h1.custom {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0;
+  padding: 0;
+  height: auto;
+  width: auto;
+  line-height: 2rem;
+}
+
+div.custom h2.custom {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0;
+  padding: 0;
+  height: auto;
+  width: auto;
+  line-height: 1.5rem;
+}
+
+div.custom h3.custom {
+  font-size: 1.125rem;
+  font-weight: 700;
+  margin: 0;
+  padding: 0;
+  height: auto;
+  width: auto;
+  line-height: 1.125rem;
+}
+
+div.custom h4.custom {
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 0;
+  padding: 0;
+  height: auto;
+  width: auto;
+  line-height: 1rem;
+}

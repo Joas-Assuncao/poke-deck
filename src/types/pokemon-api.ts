@@ -84,6 +84,7 @@ export interface PokemonCard {
     large: string;
   };
   tcgplayer: TCGPlayer;
+  added: boolean;
 }
 
 export interface PokemonCardsResponse {

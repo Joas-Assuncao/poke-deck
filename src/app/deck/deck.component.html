@@ -1,1 +1,56 @@
-<p>deck works!</p>
+<div class="custom flex flex-col text-center items-center gap-8">
+  <header class="max-w-full flex flex-col items-center gap-4">
+    <h1 class="custom flex items-center gap-10 bg-transparent text-blue-650">
+      Crie seu baralho!
+      <button
+        #target="tooltipTarget"
+        [hideDelay]="500"
+        [igxTooltipTarget]="tooltipRef"
+      >
+        <igx-icon>home</igx-icon></button
+      >
+    </h1>
+    <h3 class="custom bg-transparent text-blue-650">
+      Selecione ao menos 24 cartas para criar um baralho.
+    </h3>
+    <form class="w-full">
+      <igx-input-group>
+        <input
+          igxInput
+          name="deckName"
+          type="text"
+          [disabled]="hasCard"
+          [(ngModel)]="name"
+        />
+        <label igxLabel for="deckName">Nome do baralho</label>
+      </igx-input-group>
+      <small *ngIf="!name || name.length < 1" class="custom bg-transparent text-red-450 font-bold">
+        Digite um nome para liberar a adição de cartas ao baralho.
+      </small>
+    </form>
+  </header>
+
+  <div class="flex justify-center items-center" *ngIf="isLoading">
+    <div
+      class="animate-spin inline-block size-32 border-[3px] border-current border-t-transparent text-blue-350 rounded-full dark:text-blue-500"
+      role="status"
+      aria-label="loading"
+    >
+      <span class="sr-only">Loading...</span>
+    </div>
+  </div>
+
+  <main *ngIf="!isLoading">
+    <div
+      class="cards grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
+    >
+      <app-card
+        (savedCard)="(savedCard)"
+        [name]="name"
+        *ngFor="let card of cards"
+        [card]="card"
+      ></app-card>
+    </div>
+  </main>
+</div>
+<div #tooltipRef="tooltip" igxTooltip>Voltar para baralhos</div>

@@ -1,3 +1,17 @@
-<div class="w-full h-full flex flex-col p-4" *ngIf="!isLoading">
-  <app-card *ngFor="let deck of pokemonDecks" [deck]="deck"></app-card>
+<div class="w-full h-full flex flex-col justify-center p-4">
+  <ng-container *ngIf="!isLoading && pokemonDecks && pokemonDecks[0]">
+    <app-card *ngFor="let deck of pokemonDecks" [deck]="deck"></app-card>
+  </ng-container>
+  <ng-container *ngIf="!isLoading && (!pokemonDecks || !pokemonDecks[0])">
+    <app-empty-state title="deck">
+      <a
+        routerLink="/decks/create"
+        igxButton="contained"
+        igxButtonColor="white"
+        class="bg-yellow-450 rounded-lg w-60 h-20 text-xl"
+      >
+        Criar baralho
+      </a>
+    </app-empty-state>
+  </ng-container>
 </div>
