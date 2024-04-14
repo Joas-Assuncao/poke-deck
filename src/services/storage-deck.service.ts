@@ -7,32 +7,31 @@ import { Deck } from 'src/types/pokemon-deck';
   providedIn: 'root',
 })
 export class StorageDeckService {
-  private decks!: BehaviorSubject<Deck[]>;
+  private decks
+  : BehaviorSubject<Deck[]> = new BehaviorSubject<Deck[]>([]);
 
-  constructor() {
-    this.decks = new BehaviorSubject<Deck[]>([]);
-  }
+  constructor() {}
 
   public getDeckList(): Deck[] {
-    return this.decks.getValue();
+    return [...this.decks.getValue()];
   }
 
   public $getDeckList(): Observable<Deck[]> {
     return this.decks.asObservable();
   }
 
-  public saveDeckList(deck: Deck): void {
+  public saveDeck(deck: Deck): void {
     const decks = this.getDeckList();
 
     const index = decks.findIndex((d) => d.name === deck.name);
 
     if (index === -1) {
-      decks.push(deck);
-    } else {
-      decks[index] = deck;
+      this.decks.next([...decks, deck])
     }
 
-    this.decks.next(decks);
+    const newDecks = decks.filter((d) => d.name !== deck.name);
+
+    this.decks.next([...newDecks, deck]);
   }
 
   public getDeck(name: string): Deck | undefined {
@@ -43,12 +42,19 @@ export class StorageDeckService {
     const deck = this.getDeck(name);
 
     if (!deck) {
+      const newDeck: Deck = {
+        name,
+        cards: [card],
+      };
+      this.saveDeck(newDeck);
       return;
     }
 
-    deck.cards.push(card);
+    const newDeck = {...deck, cards: [...deck.cards, card]};
 
-    this.saveDeckList(deck);
+    console.log(newDeck);
+
+    this.saveDeck(newDeck);
   }
 
   public removeCard({ card, name }: { card: PokemonCard; name: string }): void {
@@ -60,7 +66,7 @@ export class StorageDeckService {
 
     deck.cards = deck.cards.filter((c) => c.id !== card.id);
 
-    this.saveDeckList(deck);
+    this.saveDeck(deck);
   }
 
   public clearDeck(name: string): void {
@@ -72,6 +78,6 @@ export class StorageDeckService {
 
     deck.cards = [];
 
-    this.saveDeckList(deck);
+    this.saveDeck(deck);
   }
 }

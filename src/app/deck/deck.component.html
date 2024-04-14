@@ -21,7 +21,8 @@
             igxInput
             name="deckName"
             type="text"
-            [disabled]="hasCard"
+            [disabled]="!!hasCard"
+            class="disabled:bg-gray-200 disabled:text-gray-500"
             [(ngModel)]="deckName"
           />
           <label igxLabel for="deckName">Nome do baralho</label>

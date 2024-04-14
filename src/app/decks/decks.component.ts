@@ -22,7 +22,11 @@ export class DecksComponent {
   constructor(private storageDeck: StorageDeckService) {}
 
   ngOnInit() {
-    this.pokemonDecks = this.storageDeck.getDeckList();
+    this.storageDeck.$getDeckList().subscribe((decks) => {
+      console.log(decks);
+
+      this.pokemonDecks = decks;
+    });
   }
 
   @HostBinding('style.--ig-size')

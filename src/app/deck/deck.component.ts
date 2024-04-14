@@ -57,7 +57,7 @@ export class DeckComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.isLoading = true;
-    this.pokeApiService.getPokemonCards({page: 1, pageSize: 10}).subscribe({
+    this.pokeApiService.getPokemonCards({page: 1, pageSize: 20}).subscribe({
       next: (response) => {
         this.cards = response;
         this.isLoading = false;
@@ -70,6 +70,8 @@ export class DeckComponent implements OnInit, OnDestroy {
   }
 
   savedCard(event: boolean) {
+    console.log(event);
+    
     this.hasCard = event;
   }
 
