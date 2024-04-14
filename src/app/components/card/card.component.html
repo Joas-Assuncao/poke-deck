@@ -1,4 +1,4 @@
-<igx-card elevated class="max-w-60 w-full items-center bg-yellow-">
+<igx-card elevated class="max-w-60 w-full h-full items-center bg-yellow-">
   <igx-card-media
     class="max-w-44 w-full p-4"
     *ngIf="card && card.images && card.images.small"
@@ -6,7 +6,7 @@
     <img src="{{ card.images.small }}" />
   </igx-card-media>
   <igx-card-header>
-    <a routerLink="/decks/:name" *ngIf="deck"></a>
+    <a routerLink="/decks/:name" *ngIf="deck">Ver detalhes</a>
     <h3 igxCardHeaderTitle class="text-gray-200">
       {{ card.name || deck.name }}
     </h3>

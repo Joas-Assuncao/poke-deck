@@ -21,10 +21,16 @@ export class CardComponent {
   @Output() savedCard: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor(private storageDeck: StorageDeckService) {
+    this.storageDeck.$getDeckList().subscribe((decks) => {
+      // console.log({decks});
+    });
   }
 
   saveCard(card: PokemonCard) {
+    this.savedCard.emit(true);
+
     card.added = true;
+
     this.storageDeck.saveCard({
       card,
       name: this.name,
