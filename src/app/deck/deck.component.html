@@ -63,14 +63,13 @@
     <div
       class="cards grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
     >
-      <app-card
+      <app-pokemon-card
         (savedCard)="(savedCard)"
         [name]="deckName"
         *ngFor="let card of cards"
         [card]="card"
-      ></app-card>
+      ></app-pokemon-card>
     </div>
-    <!-- quero um botao "carregar mais" -->
     <div class="flex justify-center items-center gap-4">
       <button
         *ngIf="!isLoadingMore"

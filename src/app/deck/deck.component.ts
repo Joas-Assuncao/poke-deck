@@ -1,16 +1,17 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
+import { Observable } from 'rxjs';
 import { PokeApiService } from 'src/services/poke-api.service';
 import { PokemonCard } from 'src/types/pokemon-api';
-import { CardComponent } from '../components/card/card.component';
+import { Deck } from 'src/types/pokemon-deck';
+import { PokemonCardComponent } from '../components/pokemon-card/pokemon-card.component';
 import { IgxModule } from '../shared/igx/igx.module';
-import { RouterLink } from '@angular/router';
-import { StorageDeckService } from 'src/services/storage-deck.service';
 
 @Component({
   selector: 'app-deck',
   standalone: true,
-  imports: [IgxModule, CardComponent, FormsModule, RouterLink],
+  imports: [IgxModule, PokemonCardComponent, FormsModule, RouterLink],
   providers: [PokeApiService],
   templateUrl: './deck.component.html',
   styleUrls: ['./deck.component.css'],
@@ -26,24 +27,14 @@ export class DeckComponent implements OnInit, OnDestroy {
   isLoadingMore: boolean = false;
   page: number = 1;
 
-  constructor(
-    private pokeApiService: PokeApiService,
-    private storageDeck: StorageDeckService
-  ) {}
+  decks!: Observable<Deck[]>;
 
-  ngOnDestroy(): void {
-    const deck = this.storageDeck.getDeck(this.deckName);
-    if(deck && deck.cards.length < 24) {
-      this.storageDeck.clearDeck(this.deckName);
-    }
-  }
+  constructor(private pokeApiService: PokeApiService) {}
 
-  findPokemon(event: any) {
-    event.preventDefault();
-    this.cardName = event.target.value;
-    
+  ngOnInit() {
     this.isLoading = true;
-    this.pokeApiService.getPokemonCards({name: this.cardName}).subscribe({
+
+    this.pokeApiService.getPokemonCards({ page: 1, pageSize: 20 }).subscribe({
       next: (response) => {
         this.cards = response;
         this.isLoading = false;
@@ -55,9 +46,16 @@ export class DeckComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnInit() {
+  ngOnDestroy(): void {
+    console.log('fechou');
+  }
+
+  findPokemon(event: any) {
+    event.preventDefault();
+    this.cardName = event.target.value;
+
     this.isLoading = true;
-    this.pokeApiService.getPokemonCards({page: 1, pageSize: 20}).subscribe({
+    this.pokeApiService.getPokemonCards({ name: this.cardName }).subscribe({
       next: (response) => {
         this.cards = response;
         this.isLoading = false;
@@ -70,23 +68,23 @@ export class DeckComponent implements OnInit, OnDestroy {
   }
 
   savedCard(event: boolean) {
-    console.log(event);
-    
     this.hasCard = event;
   }
 
   loadMore() {
     this.isLoadingMore = true;
     this.page++;
-    this.pokeApiService.getPokemonCards({ page: this.page, name: this.cardName }).subscribe({
-      next: (response) => {
-        this.cards = [...this.cards, ...response];
-        this.isLoadingMore = false;
-      },
-      error: (error) => {
-        this.isLoadingMore = false;
-        console.error(error);
-      },
-    });
+    this.pokeApiService
+      .getPokemonCards({ page: this.page, name: this.cardName })
+      .subscribe({
+        next: (response) => {
+          this.cards = [...this.cards, ...response];
+          this.isLoadingMore = false;
+        },
+        error: (error) => {
+          this.isLoadingMore = false;
+          console.error(error);
+        },
+      });
   }
 }

@@ -1,18 +1,30 @@
-<div class="w-full h-full flex flex-col justify-center p-4">
-  <ng-container *ngIf="!isLoading && pokemonDecks && pokemonDecks[0]">
-    <app-card *ngFor="let deck of pokemonDecks" [deck]="deck"></app-card>
-  </ng-container>
-  <ng-container *ngIf="!isLoading && (!pokemonDecks || !pokemonDecks[0])">
-    <app-empty-state title="deck">
+<div class="custom w-full h-full flex flex-col p-4">
+  <header class="w-full flex flex-col items-center gap-4">
+    <h1 class="custom flex items-center gap-2 bg-transparent text-blue-650">
+      Aqui estão seus baralhos!
       <a
         routerLink="/decks/create"
         igxButton="contained"
         igxButtonColor="#363b81"
-        class="bg-yellow-450 rounded-lg w-60 h-20 text-xl"
-        style="font-size: 1.5rem;"
+        style="font-size: 3.5rem; line-height: 0; margin-top: -10px;"
+        #target="tooltipTarget"
+        [hideDelay]="500"
+        [igxTooltipTarget]="tooltipRef"
       >
-        Criar baralho
+        +
       </a>
-    </app-empty-state>
-  </ng-container>
+    </h1>
+  </header>
+  <main class="flex flex-col gap-4 items-center" *ngIf="pokemonDecks && pokemonDecks[0]">
+    <div
+      class="cards grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
+    >
+      <app-deck-card
+        *ngFor="let deck of pokemonDecks"
+        [deck]="deck"
+      ></app-deck-card>
+    </div>
+  </main>
 </div>
+
+<div #tooltipRef="tooltip" igxTooltip>Adicionar baralho</div>

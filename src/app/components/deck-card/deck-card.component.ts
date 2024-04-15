@@ -6,14 +6,13 @@ import { PokemonCard } from 'src/types/pokemon-api';
 import { Deck } from 'src/types/pokemon-deck';
 
 @Component({
-  selector: 'app-card',
+  selector: 'app-deck-card',
   standalone: true,
   imports: [IgxModule, RouterLink],
-  providers: [StorageDeckService],
-  templateUrl: './card.component.html',
-  styleUrls: ['./card.component.css'],
+  templateUrl: './deck-card.component.html',
+  styleUrls: ['./deck-card.component.css'],
 })
-export class CardComponent {
+export class DeckCardComponent {
   @Input() name!: string;
   @Input() deck!: Deck;
   @Input() card!: PokemonCard;
@@ -22,23 +21,10 @@ export class CardComponent {
 
   constructor(private storageDeck: StorageDeckService) {}
 
-  saveCard(card: PokemonCard) {
+  saveCard() {
+    this.card.added = true;
+    this.storageDeck.addCardToDeck(this.name, this.card);
     this.savedCard.emit(true);
-
-    card.added = true;
-
-    this.storageDeck.saveCard({
-      card,
-      name: this.name,
-    });
-  }
-
-  removeCard(card: PokemonCard) {
-    card.added = false;
-    this.storageDeck.removeCard({
-      card,
-      name: this.name,
-    });
   }
 
   needComma(index: string, length: number) {
