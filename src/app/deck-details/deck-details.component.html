@@ -1,0 +1,15 @@
+<div class="custom flex flex-col text-center items-center gap-8 p-4">
+  <main class="flex flex-col gap-4">
+    <div
+      class="cards grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
+    >
+      <ng-container *ngIf="deck">
+        <app-pokemon-card
+          [deckName]="deck.name"
+          *ngFor="let card of deck.cards"
+          [card]="card"
+        ></app-pokemon-card>
+      </ng-container>
+    </div>
+  </main>
+</div>

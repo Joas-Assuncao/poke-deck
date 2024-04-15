@@ -1,74 +1,15 @@
-<div class="custom">
-  <igx-card elevated class="max-w-60 w-full h-full items-center bg-yellow-">
-    <igx-card-media
-      class="max-w-44 w-full p-4"
-      *ngIf="card && card.images && card.images.small"
-    >
-      <img src="{{ card.images.small }}" />
-    </igx-card-media>
+<div class="custom h-full">
+  <igx-card elevated class="max-w-60 w-full h-full flex flex-col items-center">
     <igx-card-header>
       <a
-        class="py-2 px-4 text-blue-650 border border-blue-650 rounded-lg"
-        routerLink="/decks/:name"
+        class="py-2 px-4 text-blue-650 border border-blue-650 rounded-lg cursor-pointer"
+        routerLink="/decks/{{ deck.name }}"
         *ngIf="deck"
         >Ver detalhes</a
       >
       <h3 igxCardHeaderTitle class="custom text-gray-200">
-        {{ card && card.name ? card.name : deck.name }}
+        {{ deck.name }}
       </h3>
-      <h5
-        igxCardHeaderSubtitle
-        *ngIf="card.supertype"
-        class="custom text-gray-200"
-      >
-        Super-Tipo: {{ card.supertype }}
-      </h5>
-      <h5
-        igxCardHeaderSubtitle
-        *ngIf="card.types && card.types[0]"
-        class="text-gray-200"
-      >
-        Tipo:
-        <span *ngFor="let type of card.types; let index"
-          >{{ type }}{{ needComma(index, card.types.length) ? "," : "" }}</span
-        >
-      </h5>
     </igx-card-header>
-
-    <igx-card-content>
-      <ng-container *ngIf="card.abilities && card.abilities[0]">
-        <p
-          *ngFor="let abilitie of card.abilities; let index"
-          class="text-gray-200"
-        >
-          <strong> {{ abilitie.name }} | {{ abilitie.type }} : </strong>
-          {{ abilitie.text }}
-        </p>
-      </ng-container>
-    </igx-card-content>
-
-    <igx-card-actions>
-      <button
-        *ngIf="!card.added"
-        igxButton
-        igxRipple
-        igxStart
-        [disabled]="!name || name.length < 1"
-        [igxButtonColor]="!name || name.length < 1 ? '#6b7280' : '#5DB9FF'"
-        (click)="saveCard()"
-        class="disabled:bg-yellow-950 disabled:text-gray-500"
-      >
-        Adicionar ao baralho
-      </button>
-      <button
-        *ngIf="card.added"
-        igxButton
-        igxRipple
-        igxStart
-        igxButtonColor="#FF1F1F"
-      >
-        Remover do baralho
-      </button>
-    </igx-card-actions>
   </igx-card>
 </div>

@@ -1,4 +1,4 @@
-<div class="custom flex flex-col text-center items-center gap-8">
+<div class="custom flex flex-col text-center items-center gap-8 p-4">
   <header class="w-full flex flex-col items-center gap-4">
     <h1 class="custom flex items-center gap-10 bg-transparent text-blue-650">
       Crie seu baralho!
@@ -21,8 +21,8 @@
             igxInput
             name="deckName"
             type="text"
-            [disabled]="!!hasCard"
-            class="disabled:bg-gray-200 disabled:text-gray-500"
+            [disabled]="hasCard"
+            class="disabled:text-gray-500"
             [(ngModel)]="deckName"
           />
           <label igxLabel for="deckName">Nome do baralho</label>
@@ -64,7 +64,7 @@
       class="cards grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
     >
       <app-pokemon-card
-        (savedCard)="(savedCard)"
+        (savedCard)="savedCard($event)"
         [name]="deckName"
         *ngFor="let card of cards"
         [card]="card"

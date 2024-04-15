@@ -15,24 +15,24 @@
 }
 
 igx-input-group label {
-  color: #FFE447 !important;
+  color: #5DB9FF !important;
 }
 
 igx-input-group input {
-  color: #FFE447 !important;
+  color: #5DB9FF !important;
   font-weight: 600 !important;
 }
 
 igx-input-group > div::after {
-  border-block-end: 1px solid #FFE447 !important;
+  border-block-end: 1px solid #5DB9FF !important;
 }
 
 igx-input-group > div:hover::after {
-  border-block-end: 1px solid #FFE447 !important;
+  border-block-end: 1px solid #5DB9FF !important;
 }
 
 igx-input-group.igx-input-group--focused .igx-input-group__line {
-  background: #FFE447 !important;
+  background: #5DB9FF !important;
 }
 
 div.custom h1.custom {

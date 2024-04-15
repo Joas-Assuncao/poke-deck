@@ -14,6 +14,7 @@ import { Deck } from 'src/types/pokemon-deck';
 })
 export class PokemonCardComponent {
   @Input() name!: string;
+  @Input() deckName!: string;
   @Input() deck!: Deck;
   @Input() card!: PokemonCard;
 
@@ -25,6 +26,12 @@ export class PokemonCardComponent {
     this.card.added = true;
     this.storageDeck.addCardToDeck(this.name, this.card);
     this.savedCard.emit(true);
+  }
+
+  removeCard() {
+    this.card.added = false;
+    this.storageDeck.removeCardFromDeck(this.name, this.card);
+    this.savedCard.emit(false);
   }
 
   needComma(index: string, length: number) {

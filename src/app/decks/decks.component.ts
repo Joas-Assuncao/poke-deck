@@ -16,16 +16,12 @@ import { DeckCardComponent } from '../components/deck-card/deck-card.component';
   styleUrls: ['./decks.component.css'],
 })
 export class DecksComponent {
-  pokemonDecks: Deck[] = [
-    { name: 'Deck 1', cards: [] },
-    { name: 'Deck 2', cards: [] },
-    { name: 'Deck 3', cards: [] },
-  ];
+  pokemonDecks!: Deck[];
 
   constructor(private storageDeck: StorageDeckService) {}
 
   ngOnInit(): void {
-    // this.storageDeck.decks$.subscribe((decks) => this.pokemonDecks = decks);
+    this.storageDeck.decks$.subscribe((decks) => this.pokemonDecks = decks);
   }
 
   @HostBinding('style.--ig-size')

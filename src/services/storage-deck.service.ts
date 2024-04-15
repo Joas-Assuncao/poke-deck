@@ -29,4 +29,36 @@ export class StorageDeckService {
       this.decksSubject.next(decks);
     }
   }
+
+  removeCardFromDeck(name: string, card: PokemonCard) {
+    const decks = this.decksSubject.value;
+    const deckIndex = decks.findIndex((deck) => deck.name === name);
+
+    if (deckIndex !== -1) {
+      const updatedDeck = decks[deckIndex];
+      updatedDeck.cards = updatedDeck.cards.filter(
+        (deckCard) => deckCard.id !== card.id
+      );
+      decks[deckIndex] = updatedDeck;
+      this.decksSubject.next(decks);
+    }
+  }
+
+  getDeck(name: string): Deck | undefined {
+    return this.decksSubject.value.find((deck) => deck.name === name);
+  }
+
+  removeDeck(name: string) {
+    const decks = this.decksSubject.value;
+    const updatedDecks = decks.filter((deck) => deck.name !== name);
+    this.decksSubject.next(updatedDecks);
+  }
+
+  clearDecks() {
+    this.decksSubject.next([]);
+  }
+
+  getDecks(): Deck[] {
+    return this.decksSubject.value;
+  }
 }

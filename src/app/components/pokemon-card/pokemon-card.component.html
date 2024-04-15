@@ -1,7 +1,7 @@
-<div class="custom">
-  <igx-card elevated class="max-w-60 w-full h-full items-center bg-yellow-">
+<div class="custom h-full">
+  <igx-card elevated class="max-w-60 w-full h-full items-center p-4">
     <igx-card-media
-      class="max-w-44 w-full p-4"
+      class="max-w-44 w-full"
       *ngIf="card && card.images && card.images.small"
     >
       <img src="{{ card.images.small }}" />
@@ -41,7 +41,7 @@
       </ng-container>
     </igx-card-content>
 
-    <igx-card-actions>
+    <igx-card-actions *ngIf="!deckName">
       <button
         *ngIf="!card.added"
         igxButton
@@ -51,6 +51,9 @@
         [igxButtonColor]="!name || name.length < 1 ? '#6b7280' : '#5DB9FF'"
         (click)="saveCard()"
         class="disabled:bg-yellow-950 disabled:text-gray-500"
+        #target="tooltipTarget"
+        [hideDelay]="500"
+        [igxTooltipTarget]="tooltipRef"
       >
         Adicionar ao baralho
       </button>
@@ -60,9 +63,12 @@
         igxRipple
         igxStart
         igxButtonColor="#FF1F1F"
+        (click)="saveCard()"
       >
         Remover do baralho
       </button>
     </igx-card-actions>
   </igx-card>
 </div>
+
+<div #tooltipRef="tooltip" igxTooltip>Digite um nome para começar a salvar cartas!</div>
