@@ -29,7 +29,7 @@ Ambiente de Desenvolvimento
 Durante o desenvolvimento, utilizei um ambiente de desenvolvimento moderno, com as ferramentas mais recentes disponíveis. O Tailwind CSS foi adotado para facilitar o desenvolvimento de estilos e garantir uma aplicação visualmente atraente. Além disso, foram utilizadas boas práticas de desenvolvimento, como testes unitários e integração contínua.
 Repositório
 
-O código fonte deste projeto está disponível no GitHub [Pokemon-Deck][https://github.com/Joas-Assuncao/pokemon-deck]. Certifique-se de verificar o arquivo README.md para mais informações sobre como executar o projeto localmente e detalhes adicionais sobre a arquitetura e funcionalidades implementadas.
+O código fonte deste projeto está disponível no GitHub [Poke-Deck](https://github.com/Joas-Assuncao/pokemon-deck). Certifique-se de verificar o arquivo README.md para mais informações sobre como executar o projeto localmente e detalhes adicionais sobre a arquitetura e funcionalidades implementadas.
 
 Este projeto foi desenvolvido como parte do teste proposto pela Agência Estado. Agradeço pela oportunidade de participar deste processo seletivo e estou à disposição para quaisquer dúvidas ou esclarecimentos adicionais.
 
