@@ -17,6 +17,7 @@ export class DeckDetailsComponent implements OnInit {
   deck!: Deck | undefined;
   trainers: number = 0;
   pokemons: number = 0;
+  types: string[] = [];
 
   constructor(
     private storageDeck: StorageDeckService,
@@ -27,6 +28,7 @@ export class DeckDetailsComponent implements OnInit {
     const name = this.route.snapshot.params['name'];
     this.deck = this.storageDeck.getDeck(name);
     this.filterBySuperType();
+    this.calculateTypes();
   }
 
   filterBySuperType() {
@@ -37,5 +39,21 @@ export class DeckDetailsComponent implements OnInit {
         this.trainers++;
       }
     })
+  }
+
+  calculateTypes() {
+    this.deck?.cards.forEach(card => {
+      if (card.types) {
+        card.types.forEach(type => {
+          if (!this.types.includes(type)) {
+            this.types.push(type);
+          }
+        });
+      }
+    });
+  }
+
+  joinTypes() {
+    return this.types.join(', ');
   }
 }

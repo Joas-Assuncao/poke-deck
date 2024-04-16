@@ -87,8 +87,12 @@ export class DeckComponent implements OnInit, OnDestroy {
       cards: this.cards.filter((card) => card.added),
     };
 
+    console.log(deck.cards.length);
+    
+
     if (deck.cards.length < 24 || deck.cards.length > 60) {
       this.toast.open('O baralho precisa ter entre 24 e 60 cartas!');
+      return;
     }
 
     this.storageDeck.saveDeck(deck);
@@ -126,7 +130,7 @@ export class DeckComponent implements OnInit, OnDestroy {
       this.hasCard = true;
       card.added = true;
       this.deck.cards.push(card);
-      this.filterBySuperType(card);
+      this.sumBySuperType(card);
       return;
     }
 
@@ -138,6 +142,8 @@ export class DeckComponent implements OnInit, OnDestroy {
       this.deck.cards = this.deck.cards.filter(
         (deckCard) => deckCard.id !== card.id
       );
+
+      this.subBySuperType(card);
 
       card.added = false;
     }
@@ -171,11 +177,19 @@ export class DeckComponent implements OnInit, OnDestroy {
       });
   }
 
-  filterBySuperType(card: PokemonCard) {
+  sumBySuperType(card: PokemonCard) {
     if (card.supertype === 'Pokémon') {
       this.pokemons++;
     } else if (card.supertype === 'Trainer') {
       this.trainers++;
+    }
+  }
+
+  subBySuperType(card: PokemonCard) {
+    if (card.supertype === 'Pokémon') {
+      this.pokemons--;
+    } else if (card.supertype === 'Trainer') {
+      this.trainers--;
     }
   }
 }

@@ -20,8 +20,4 @@ export class DeckCardComponent {
   deleteDeck() {
     this.storageDeck.removeDeck(this.deck.name);
   }
-
-  needComma(index: string, length: number) {
-    return Number(index) < length - 1;
-  }
 }

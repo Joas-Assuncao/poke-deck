@@ -9,8 +9,11 @@
         <igx-icon>home</igx-icon></a
       >
     </h1>
-    <span>Treinadores - {{ trainers }}/{{ deck?.cards?.length || 0 }}</span>
-    <span>Pokemons - {{ pokemons }}/{{ deck?.cards?.length || 0 }}</span>
+    <div class="flex items-center justify-between gap-4">
+      <span>Treinadores - {{ trainers }}/{{ deck?.cards?.length || 0 }}</span>
+      <span>Pokemons - {{ pokemons }}/{{ deck?.cards?.length || 0 }}</span>
+    </div>
+    <p class="flex items-center">Tipos - <span>{{ joinTypes() }}</span></p>
   </header>
   <main class="flex flex-col gap-4">
     <div

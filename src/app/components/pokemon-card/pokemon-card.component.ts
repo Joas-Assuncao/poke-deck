@@ -29,7 +29,7 @@ export class PokemonCardComponent {
     this.removeCard.emit({name: this.name, card: this.card});
   }
 
-  needComma(index: string, length: number) {
-    return Number(index) < length - 1;
+  joinTypes(types: string[]) {
+    return types.join(', ');
   }
 }
