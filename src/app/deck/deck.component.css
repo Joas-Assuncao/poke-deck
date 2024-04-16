@@ -1,0 +1,9 @@
+button.custom {
+  color: #363b81;
+  border: 1px solid #363b81;
+}
+
+button.custom:hover {
+  color: #363b81;
+  background-color: #b6b9e3;
+}

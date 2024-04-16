@@ -61,4 +61,17 @@ export class StorageDeckService {
   getDecks(): Deck[] {
     return this.decksSubject.value;
   }
+
+  saveDeck(deck: Deck) {
+    const decks = this.decksSubject.value;
+    const deckIndex = decks.findIndex((d) => d.name === deck.name);
+
+    if (deckIndex !== -1) {
+      decks[deckIndex] = deck;
+      this.decksSubject.next(decks);
+    } else {
+      decks.push(deck);
+      this.decksSubject.next(decks);
+    }
+  }
 }

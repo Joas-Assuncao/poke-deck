@@ -41,7 +41,7 @@
       </ng-container>
     </igx-card-content>
 
-    <igx-card-actions *ngIf="!deckName">
+    <igx-card-actions>
       <button
         *ngIf="!card.added"
         igxButton
@@ -49,7 +49,7 @@
         igxStart
         [disabled]="!name || name.length < 1"
         [igxButtonColor]="!name || name.length < 1 ? '#6b7280' : '#5DB9FF'"
-        (click)="saveCard()"
+        (click)="handleSaveCard()"
         class="disabled:bg-yellow-950 disabled:text-gray-500"
         #target="tooltipTarget"
         [hideDelay]="500"
@@ -63,7 +63,7 @@
         igxRipple
         igxStart
         igxButtonColor="#FF1F1F"
-        (click)="saveCard()"
+        (click)="handleRemoveCard()"
       >
         Remover do baralho
       </button>
@@ -71,4 +71,6 @@
   </igx-card>
 </div>
 
-<div #tooltipRef="tooltip" igxTooltip>Digite um nome para começar a salvar cartas!</div>
+<div #tooltipRef="tooltip" igxTooltip>
+  Digite um nome para começar a salvar cartas!
+</div>

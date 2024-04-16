@@ -21,7 +21,7 @@ export class DecksComponent {
   constructor(private storageDeck: StorageDeckService) {}
 
   ngOnInit(): void {
-    this.storageDeck.decks$.subscribe((decks) => this.pokemonDecks = decks);
+    this.storageDeck.decks$.subscribe((decks) => (this.pokemonDecks = decks));
   }
 
   @HostBinding('style.--ig-size')

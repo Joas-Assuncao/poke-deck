@@ -6,6 +6,7 @@ import {
   IgxIconModule,
   IgxInputGroupModule,
   IgxRippleModule,
+  IgxToastModule,
   IgxTooltipModule,
 } from 'igniteui-angular';
 
@@ -17,7 +18,8 @@ import {
     IgxRippleModule,
     IgxInputGroupModule,
     IgxIconModule,
-    IgxTooltipModule
+    IgxTooltipModule,
+    IgxToastModule,
   ],
   exports: [
     CommonModule,
@@ -26,7 +28,8 @@ import {
     IgxRippleModule,
     IgxInputGroupModule,
     IgxIconModule,
-    IgxTooltipModule
+    IgxTooltipModule,
+    IgxToastModule,
   ],
 })
 export class IgxModule {}

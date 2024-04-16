@@ -21,4 +21,9 @@ export const APP_ROUTES: Routes = [
     loadComponent: () =>
       import('./deck-details/deck-details.component').then((m) => m.DeckDetailsComponent),
   },
+  {
+    path: 'decks/:name/edit',
+    loadComponent: () =>
+      import('./deck/deck.component').then((m) => m.DeckComponent),
+  },
 ];

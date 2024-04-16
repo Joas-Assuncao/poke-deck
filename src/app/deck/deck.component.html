@@ -2,12 +2,7 @@
   <header class="w-full flex flex-col items-center gap-4">
     <h1 class="custom flex items-center gap-10 bg-transparent text-blue-650">
       Crie seu baralho!
-      <a
-        routerLink="/decks"
-        #target="tooltipTarget"
-        [hideDelay]="500"
-        [igxTooltipTarget]="tooltipRef"
-      >
+      <a routerLink="/decks" [hideDelay]="500" [igxTooltipTarget]="tooltipRef">
         <igx-icon>home</igx-icon></a
       >
     </h1>
@@ -16,7 +11,7 @@
     </h3>
     <div class="w-full flex flex-row gap-4">
       <div class="w-full flex flex-col items-start">
-        <igx-input-group style="width: 100%;">
+        <igx-input-group style="width: 100%">
           <input
             igxInput
             name="deckName"
@@ -35,7 +30,7 @@
         </small>
       </div>
       <div class="w-full flex flex-col items-start">
-        <igx-input-group style="width: 100%;">
+        <igx-input-group style="width: 100%">
           <input
             igxInput
             name="pokemonName"
@@ -45,7 +40,28 @@
           <label igxLabel for="pokemonName">Filtrar por nome</label>
         </igx-input-group>
       </div>
-
+      <div
+        class="w-full flex items-center justify-end gap-4"
+        [hideDelay]="500"
+        [igxTooltipTarget]="tooltipRefSave"
+      >
+        <button
+          igxButton="outlined"
+          igxRipple
+          igxButtonColor="black"
+          [disabled]="!deckName || deckName.length < 1"
+          [style]="!deckName || deckName.length < 1 ? 'color: #b6b9e3;' : ''"
+          (click)="saveDeck()"
+          class="custom p-8 text-xl"
+        >
+          Salvar baralho
+        </button>
+      </div>
+    </div>
+    
+    <div class="flex justify-between gap-4">
+      <span class="text-blue-650">Treinadores - {{ trainers }}/{{ deck?.cards?.length || 0 }}</span>
+      <span class="text-blue-650">Pokemons - {{ pokemons }}/{{ deck?.cards?.length || 0 }}</span>
     </div>
   </header>
 
@@ -59,12 +75,16 @@
     </div>
   </div>
 
-  <main class="flex flex-col gap-4" *ngIf="!isLoading">
+  <main
+    class="flex flex-col gap-4 max-h-[500px] overflow-y-auto p-4 rounded-md bg-gray-200/50"
+    *ngIf="!isLoading"
+  >
     <div
       class="cards grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
     >
       <app-pokemon-card
-        (savedCard)="savedCard($event)"
+        (saveCard)="saveCard($event)"
+        (removeCard)="removeCard($event)"
         [name]="deckName"
         *ngFor="let card of cards"
         [card]="card"
@@ -94,3 +114,8 @@
   </main>
 </div>
 <div #tooltipRef="tooltip" igxTooltip>Voltar para baralhos</div>
+<div #tooltipRefSave="tooltip" igxTooltip>
+  Digite um nome e tenha mais de 24 cartas e menos de 60 cartas para liberar o
+  botão!
+</div>
+<igx-toast #toast></igx-toast>

@@ -1,15 +1,32 @@
 <div class="custom h-full">
   <igx-card elevated class="max-w-60 w-full h-full flex flex-col items-center">
     <igx-card-header>
-      <a
-        class="py-2 px-4 text-blue-650 border border-blue-650 rounded-lg cursor-pointer"
-        routerLink="/decks/{{ deck.name }}"
-        *ngIf="deck"
-        >Ver detalhes</a
-      >
-      <h3 igxCardHeaderTitle class="custom text-gray-200">
+      <h3 igxCardHeaderTitle class="custom text-gray-800">
         {{ deck.name }}
       </h3>
     </igx-card-header>
+    <igx-card-actions class="gap-4">
+      <div class="flex flex-col w-full gap-2">
+        <a
+          class="text-center py-2 px-4 text-blue-650 border border-blue-650 rounded-lg cursor-pointer"
+          routerLink="/decks/{{ deck.name }}"
+          *ngIf="deck"
+          >Ver detalhes</a
+        >
+        <a
+          class="text-center py-2 px-4 text-blue-650 border border-blue-650 rounded-lg cursor-pointer"
+          routerLink="/decks/{{ deck.name }}/edit"
+          *ngIf="deck"
+          >Editar</a
+        >
+        <button
+          class="text-center py-2 px-4 text-red-450 border border-red-450 rounded-lg cursor-pointer"
+          *ngIf="deck"
+          (click)="deleteDeck()"
+        >
+          Excluir
+        </button>
+      </div>
+    </igx-card-actions>
   </igx-card>
 </div>

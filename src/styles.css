@@ -1,6 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@use "igniteui-angular/theming" as *;
+
+$custom-toast-theme: toast-theme(
+  $background: #dedede,
+  $text-color: #ba3838,
+  $border-radius: 12px,
+);
 
 :ng-deep :root {
   --idle-text-color: #363b81;

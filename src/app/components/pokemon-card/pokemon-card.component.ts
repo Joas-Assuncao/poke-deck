@@ -18,20 +18,15 @@ export class PokemonCardComponent {
   @Input() deck!: Deck;
   @Input() card!: PokemonCard;
 
-  @Output() savedCard: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() saveCard: EventEmitter<{name: string, card: PokemonCard}> = new EventEmitter<{name: string, card: PokemonCard}>();
+  @Output() removeCard: EventEmitter<{name: string, card: PokemonCard}> = new EventEmitter<{name: string, card: PokemonCard}>();
 
-  constructor(private storageDeck: StorageDeckService) {}
-
-  saveCard() {
-    this.card.added = true;
-    this.storageDeck.addCardToDeck(this.name, this.card);
-    this.savedCard.emit(true);
+  handleSaveCard() {
+    this.saveCard.emit({name: this.name, card: this.card});
   }
 
-  removeCard() {
-    this.card.added = false;
-    this.storageDeck.removeCardFromDeck(this.name, this.card);
-    this.savedCard.emit(false);
+  handleRemoveCard() {
+    this.removeCard.emit({name: this.name, card: this.card});
   }
 
   needComma(index: string, length: number) {

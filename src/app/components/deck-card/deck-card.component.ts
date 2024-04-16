@@ -13,18 +13,12 @@ import { Deck } from 'src/types/pokemon-deck';
   styleUrls: ['./deck-card.component.css'],
 })
 export class DeckCardComponent {
-  @Input() name!: string;
   @Input() deck!: Deck;
-  @Input() card!: PokemonCard;
-
-  @Output() savedCard: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor(private storageDeck: StorageDeckService) {}
 
-  saveCard() {
-    this.card.added = true;
-    this.storageDeck.addCardToDeck(this.name, this.card);
-    this.savedCard.emit(true);
+  deleteDeck() {
+    this.storageDeck.removeDeck(this.deck.name);
   }
 
   needComma(index: string, length: number) {
