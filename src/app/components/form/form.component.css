@@ -1,3 +1,18 @@
 :host {
   width: 100%;
 }
+
+button.custom {
+  color: #363b81;
+  border: 1px solid #363b81;
+}
+
+button.custom:disabled {
+  color: #87878c;
+  border: 1px solid #87878c;
+}
+
+button.custom:hover {
+  color: #363b81;
+  background-color: #2f3847;
+}
