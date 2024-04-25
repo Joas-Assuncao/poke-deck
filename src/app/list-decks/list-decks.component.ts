@@ -3,19 +3,19 @@ import { RouterLink } from '@angular/router';
 import { PokeApiService } from 'src/services/poke-api.service';
 import { StorageDeckService } from 'src/services/storage-deck.service';
 import { Deck } from 'src/types/pokemon-deck';
+import { DeckCardComponent } from '../components/deck-card/deck-card.component';
 import { EmptyStateComponent } from '../components/empty-state/empty-state.component';
 import { IgxModule } from '../shared/igx/igx.module';
-import { DeckCardComponent } from '../components/deck-card/deck-card.component';
 
 @Component({
-  selector: 'app-decks',
+  selector: 'app-list-decks',
   standalone: true,
   imports: [IgxModule, DeckCardComponent, EmptyStateComponent, RouterLink],
   providers: [PokeApiService],
-  templateUrl: './decks.component.html',
-  styleUrls: ['./decks.component.css'],
+  templateUrl: './list-decks.component.html',
+  styleUrls: ['./list-decks.component.css'],
 })
-export class DecksComponent {
+export class ListDecksComponent {
   pokemonDecks!: Deck[];
 
   constructor(private storageDeck: StorageDeckService) {}

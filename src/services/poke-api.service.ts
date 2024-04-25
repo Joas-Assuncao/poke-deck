@@ -11,7 +11,7 @@ export class PokeApiService {
 
   public getPokemonCards({
     page = 1,
-    pageSize = 20,
+    pageSize = 250,
     name,
   }: {
     page?: number;
@@ -26,15 +26,21 @@ export class PokeApiService {
             'X-Api-Key': 'c4319117-0e88-4b80-a40c-5aabb2e4e81a',
           },
           params: {
-            ...(name ? {
-              q: `name:${name}*`,
-            } : {})
-          }
+            ...(name
+              ? {
+                  q: `name:${name}*`,
+                }
+              : {}),
+          },
         }
       )
       .pipe(
         debounceTime(500),
         map((response) => {
+          const justId = response.data.map((card) => card.id);
+          const set = new Set(justId);
+          console.log(set.size, justId.length);
+
           return response.data.map((card) => ({ ...card, added: false }));
         })
       );

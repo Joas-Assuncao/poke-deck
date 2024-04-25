@@ -4,26 +4,38 @@ export const APP_ROUTES: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'decks',
+    redirectTo: 'list-decks',
   },
   {
-    path: 'decks',
+    path: 'list-decks',
     loadComponent: () =>
-      import('./decks/decks.component').then((m) => m.DecksComponent),
+      import('./list-decks/list-decks.component').then(
+        (m) => m.ListDecksComponent
+      ),
+    data: { title: 'Meus baralhos' },
   },
   {
     path: 'decks/create',
     loadComponent: () =>
-      import('./deck/deck.component').then((m) => m.DeckComponent),
+      import('./create-deck/create-deck.component').then(
+        (m) => m.CreateDeckComponent
+      ),
+    data: { title: 'Criar baralho' },
   },
   {
     path: 'decks/:name',
     loadComponent: () =>
-      import('./deck-details/deck-details.component').then((m) => m.DeckDetailsComponent),
+      import('./deck-details/deck-details.component').then(
+        (m) => m.DeckDetailsComponent
+      ),
+    data: { title: 'Detalhes do baralho' },
   },
   {
     path: 'decks/:name/edit',
     loadComponent: () =>
-      import('./deck/deck.component').then((m) => m.DeckComponent),
+      import('./create-deck/create-deck.component').then(
+        (m) => m.CreateDeckComponent
+      ),
+    data: { title: 'Editar baralho' },
   },
 ];

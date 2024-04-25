@@ -1,3 +1,21 @@
-<header class="w-full flex items-center justify-center p-4 border-b-2 rounded-md bg-gray-100 border-gray-200">
-  <img src="../../../assets/images/pokemon-logo.png" class="h-10">
+<header
+  class="w-full flex items-center justify-between p-4 border-b-2 bg-gray-800 border-gray-600"
+>
+  <div>
+    <img src="../../../assets/images/pokemon-logo.png" class="w-24 max-lg:w-20 max-md:w-16 max-sm:w-14" />
+  </div>
+  <div class="custom">
+    <h1 class="custom bg-transparent text-blue-350">{{ title }}</h1>
+  </div>
+  <div class="cursor-pointer w-24 max-lg:w-20 max-md:w-16 max-sm:w-14 text-right">
+    <a
+      class="text-blue-350"
+      routerLink="/list-decks"
+      [hideDelay]="500"
+      [igxTooltipTarget]="tooltipRef"
+    >
+      <igx-icon>home</igx-icon></a
+    >
+  </div>
 </header>
+<div #tooltipRef="tooltip" igxTooltip>Voltar para baralhos</div>

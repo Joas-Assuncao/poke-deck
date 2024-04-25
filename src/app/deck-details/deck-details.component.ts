@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { StorageDeckService } from 'src/services/storage-deck.service';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { PokemonCardComponent } from '../components/pokemon-card/pokemon-card.component';
+import { StorageDeckService } from 'src/services/storage-deck.service';
 import { Deck } from 'src/types/pokemon-deck';
+import { PokemonCardComponent } from '../components/pokemon-card/pokemon-card.component';
 import { IgxModule } from '../shared/igx/igx.module';
 
 @Component({
@@ -32,19 +32,19 @@ export class DeckDetailsComponent implements OnInit {
   }
 
   filterBySuperType() {
-    this.deck?.cards.forEach(card => {
+    this.deck?.cards.forEach((card) => {
       if (card.supertype === 'Pokémon') {
         this.pokemons++;
       } else if (card.supertype === 'Trainer') {
         this.trainers++;
       }
-    })
+    });
   }
 
   calculateTypes() {
-    this.deck?.cards.forEach(card => {
+    this.deck?.cards.forEach((card) => {
       if (card.types) {
-        card.types.forEach(type => {
+        card.types.forEach((type) => {
           if (!this.types.includes(type)) {
             this.types.push(type);
           }

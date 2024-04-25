@@ -25,23 +25,13 @@
         Tipo:
         <span>{{ joinTypes(card.types) }}</span>
       </h5>
-      <h5
-        igxCardHeaderSubtitle
-        *ngIf="card.hp"
-        class="text-gray-200"
-      >
+      <h5 igxCardHeaderSubtitle *ngIf="card.hp" class="text-gray-200">
         Vida:
-        <span>{{ card.hp }}</span
-        >
+        <span>{{ card.hp }}</span>
       </h5>
-      <h5
-        igxCardHeaderSubtitle
-        *ngIf="card.rarity"
-        class="text-gray-200"
-      >
+      <h5 igxCardHeaderSubtitle *ngIf="card.rarity" class="text-gray-200">
         Raridade:
-        <span>{{ card.rarity }}</span
-        >
+        <span>{{ card.rarity }}</span>
       </h5>
     </igx-card-header>
 

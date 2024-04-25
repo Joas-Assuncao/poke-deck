@@ -1,8 +1,7 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { IgxModule } from 'src/app/shared/igx/igx.module';
 import { StorageDeckService } from 'src/services/storage-deck.service';
-import { PokemonCard } from 'src/types/pokemon-api';
 import { Deck } from 'src/types/pokemon-deck';
 
 @Component({

@@ -1,24 +1,23 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { Observable } from 'rxjs';
+import { IgxToastComponent } from 'igniteui-angular';
 import { PokeApiService } from 'src/services/poke-api.service';
+import { StorageDeckService } from 'src/services/storage-deck.service';
 import { PokemonCard } from 'src/types/pokemon-api';
 import { Deck } from 'src/types/pokemon-deck';
 import { PokemonCardComponent } from '../components/pokemon-card/pokemon-card.component';
 import { IgxModule } from '../shared/igx/igx.module';
-import { StorageDeckService } from 'src/services/storage-deck.service';
-import { IgxToastComponent } from 'igniteui-angular';
 
 @Component({
-  selector: 'app-deck',
+  selector: 'app-create-deck',
   standalone: true,
   imports: [IgxModule, PokemonCardComponent, FormsModule, RouterLink],
   providers: [PokeApiService],
-  templateUrl: './deck.component.html',
-  styleUrls: ['./deck.component.css'],
+  templateUrl: './create-deck.component.html',
+  styleUrls: ['./create-deck.component.css'],
 })
-export class DeckComponent implements OnInit, OnDestroy {
+export class CreateDeckComponent implements OnInit {
   @ViewChild('toast', { read: IgxToastComponent })
   public toast!: IgxToastComponent;
 
@@ -55,7 +54,7 @@ export class DeckComponent implements OnInit, OnDestroy {
       this.deck = this.storageDeck.getDeck(this.deckName);
     }
 
-    this.pokeApiService.getPokemonCards({ page: 1, pageSize: 20 }).subscribe({
+    this.pokeApiService.getPokemonCards({ page: this.page }).subscribe({
       next: (response) => {
         this.cards = response.map((card) => {
           const deck = this.deck;
@@ -73,10 +72,6 @@ export class DeckComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy(): void {
-    console.log('fechou');
-  }
-
   saveDeck() {
     if (!this.deckName) {
       this.toast.open('Digite um nome para adicionar baralho!');
@@ -86,9 +81,6 @@ export class DeckComponent implements OnInit, OnDestroy {
       name: this.deckName,
       cards: this.cards.filter((card) => card.added),
     };
-
-    console.log(deck.cards.length);
-    
 
     if (deck.cards.length < 24 || deck.cards.length > 60) {
       this.toast.open('O baralho precisa ter entre 24 e 60 cartas!');
@@ -123,7 +115,10 @@ export class DeckComponent implements OnInit, OnDestroy {
   }
 
   saveCard({ name, card }: { name: string; card: PokemonCard }) {
-    const cardsWithSameName = this.deck?.cards ? this.deck?.cards?.filter(cardAdded => cardAdded.name === card.name).length : 0;
+    const cardsWithSameName = this.deck?.cards
+      ? this.deck?.cards?.filter((cardAdded) => cardAdded.name === card.name)
+          .length
+      : 0;
 
     if (this.deck && cardsWithSameName < 4) {
       this.deck.name = name;
