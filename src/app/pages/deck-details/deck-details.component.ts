@@ -1,15 +1,14 @@
-import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
+import { PokemonCardComponent } from 'src/app/components/pokemon-card/pokemon-card.component';
+import { IgxModule } from 'src/app/shared/igx/igx.module';
 import { StorageDeckService } from 'src/services/storage-deck.service';
 import { Deck } from 'src/types/pokemon-deck';
-import { PokemonCardComponent } from '../components/pokemon-card/pokemon-card.component';
-import { IgxModule } from '../shared/igx/igx.module';
 
 @Component({
   selector: 'app-deck-details',
   standalone: true,
-  imports: [CommonModule, PokemonCardComponent, IgxModule, RouterLink],
+  imports: [PokemonCardComponent, IgxModule, RouterLink],
   templateUrl: './deck-details.component.html',
   styleUrls: ['./deck-details.component.css'],
 })

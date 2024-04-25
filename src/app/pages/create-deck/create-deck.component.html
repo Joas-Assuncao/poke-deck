@@ -1,0 +1,58 @@
+<div
+  class="custom flex flex-col text-center items-center gap-8 p-4 bg-gray-800"
+>
+  <header class="w-full flex flex-col items-center gap-4">
+    <h3 class="custom bg-transparent text-blue-350">
+      Selecione ao menos 24 cartas para criar um baralho.
+    </h3>
+    <app-form
+      [deckName]="deckName"
+      [hasCard]="hasCard"
+      (onFindPokemon)="findPokemon($event)"
+      (onSaveDeck)="saveDeck()"
+    ></app-form>
+
+    <div class="flex justify-between gap-4">
+      <span class="text-blue-350"
+        >Treinadores - {{ trainers }}/{{ deck?.cards?.length || 0 }}</span
+      >
+      <span class="text-blue-350"
+        >Pokemons - {{ pokemons }}/{{ deck?.cards?.length || 0 }}</span
+      >
+    </div>
+  </header>
+
+  <app-loader [isLoading]="isLoading" size="large"></app-loader>
+
+  <main
+    class="flex flex-col gap-4 p-4 rounded-md bg-gray-900"
+    *ngIf="!isLoading"
+  >
+    <div
+      class="cards grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-h-[500px] overflow-y-auto p-4"
+    >
+      <app-pokemon-card
+        (saveCard)="saveCard($event)"
+        (removeCard)="removeCard($event)"
+        [name]="deckName"
+        *ngFor="let card of cards"
+        [card]="card"
+      ></app-pokemon-card>
+    </div>
+    <div class="flex justify-center items-center gap-4">
+      <button
+        *ngIf="!isLoadingMore"
+        igxButton="flat"
+        igxRipple
+        igxButtonColor="#5DB9FF"
+        (click)="loadMore()"
+        class="custom p-8 text-xl"
+      >
+        Carregar mais
+      </button>
+
+      <app-loader [isLoading]="isLoadingMore" size="small"></app-loader>
+    </div>
+  </main>
+</div>
+<igx-toast #toast></igx-toast>

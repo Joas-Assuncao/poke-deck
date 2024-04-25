@@ -1,1 +1,55 @@
-<p>form works!</p>
+
+<div class="w-full flex flex-row max-sm:flex-col max-sm:gap-8 gap-4">
+  <div class="w-full flex flex-col items-start">
+    <igx-input-group style="width: 100%">
+      <input
+        igxInput
+        name="deckName"
+        type="text"
+        [disabled]="hasCard"
+        class="disabled:text-gray-500"
+        [(ngModel)]="deckName"
+      />
+      <label igxLabel for="deckName">Nome do baralho</label>
+    </igx-input-group>
+    <small
+      *ngIf="!deckName || deckName.length < 1"
+      class="custom bg-transparent text-red-450 font-bold"
+    >
+      Digite um nome para liberar a adição de cartas ao baralho.
+    </small>
+  </div>
+  <div class="w-full flex flex-col items-start">
+    <igx-input-group style="width: 100%">
+      <input
+        igxInput
+        name="pokemonName"
+        type="text"
+        (change)="findPokemon($event)"
+      />
+      <label igxLabel for="pokemonName">Filtrar por nome</label>
+    </igx-input-group>
+  </div>
+  <div
+    class="flex justify-end max-sm:w-full"
+    [ngClass]="deckName ? 'items-end' : 'items-center'"
+    [hideDelay]="500"
+    [igxTooltipTarget]="tooltipRefSave"
+  >
+    <button
+      igxButton="outlined"
+      igxRipple
+      igxButtonColor="black"
+      [disabled]="!deckName || deckName.length < 1"
+      [style]="!deckName || deckName.length < 1 ? 'color: #87878c;' : 'color: #585fcc;'"
+      (click)="saveDeck()"
+      class="custom p-8 text-xl max-sm:w-full"
+    >
+      Salvar baralho
+    </button>
+  </div>
+</div>
+<div #tooltipRefSave="tooltip" igxTooltip>
+  Digite um nome e tenha mais de 24 cartas e menos de 60 cartas para liberar o
+  botão!
+</div>

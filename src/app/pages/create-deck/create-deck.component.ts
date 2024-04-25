@@ -1,18 +1,25 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { IgxToastComponent } from 'igniteui-angular';
+import { FormComponent } from 'src/app/components/form/form.component';
+import { LoaderComponent } from 'src/app/components/loader/loader.component';
+import { PokemonCardComponent } from 'src/app/components/pokemon-card/pokemon-card.component';
+import { IgxModule } from 'src/app/shared/igx/igx.module';
 import { PokeApiService } from 'src/services/poke-api.service';
 import { StorageDeckService } from 'src/services/storage-deck.service';
 import { PokemonCard } from 'src/types/pokemon-api';
 import { Deck } from 'src/types/pokemon-deck';
-import { PokemonCardComponent } from '../components/pokemon-card/pokemon-card.component';
-import { IgxModule } from '../shared/igx/igx.module';
 
 @Component({
   selector: 'app-create-deck',
   standalone: true,
-  imports: [IgxModule, PokemonCardComponent, FormsModule, RouterLink],
+  imports: [
+    IgxModule,
+    PokemonCardComponent,
+    FormComponent,
+    LoaderComponent,
+    RouterLink,
+  ],
   providers: [PokeApiService],
   templateUrl: './create-deck.component.html',
   styleUrls: ['./create-deck.component.css'],
@@ -75,6 +82,7 @@ export class CreateDeckComponent implements OnInit {
   saveDeck() {
     if (!this.deckName) {
       this.toast.open('Digite um nome para adicionar baralho!');
+      return;
     }
 
     const deck: Deck = {
@@ -88,7 +96,7 @@ export class CreateDeckComponent implements OnInit {
     }
 
     this.storageDeck.saveDeck(deck);
-    this.router.navigate(['/decks']);
+    this.router.navigate(['/list-decks']);
   }
 
   findPokemon(event: any) {

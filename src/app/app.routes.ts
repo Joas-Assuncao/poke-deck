@@ -9,7 +9,7 @@ export const APP_ROUTES: Routes = [
   {
     path: 'list-decks',
     loadComponent: () =>
-      import('./list-decks/list-decks.component').then(
+      import('./pages/list-decks/list-decks.component').then(
         (m) => m.ListDecksComponent
       ),
     data: { title: 'Meus baralhos' },
@@ -17,7 +17,7 @@ export const APP_ROUTES: Routes = [
   {
     path: 'decks/create',
     loadComponent: () =>
-      import('./create-deck/create-deck.component').then(
+      import('./pages/create-deck/create-deck.component').then(
         (m) => m.CreateDeckComponent
       ),
     data: { title: 'Criar baralho' },
@@ -25,7 +25,7 @@ export const APP_ROUTES: Routes = [
   {
     path: 'decks/:name',
     loadComponent: () =>
-      import('./deck-details/deck-details.component').then(
+      import('./pages/deck-details/deck-details.component').then(
         (m) => m.DeckDetailsComponent
       ),
     data: { title: 'Detalhes do baralho' },
@@ -33,7 +33,7 @@ export const APP_ROUTES: Routes = [
   {
     path: 'decks/:name/edit',
     loadComponent: () =>
-      import('./create-deck/create-deck.component').then(
+      import('./pages/create-deck/create-deck.component').then(
         (m) => m.CreateDeckComponent
       ),
     data: { title: 'Editar baralho' },

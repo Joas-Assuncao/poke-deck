@@ -1,11 +1,11 @@
 import { Component, HostBinding } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { DeckCardComponent } from 'src/app/components/deck-card/deck-card.component';
+import { EmptyStateComponent } from 'src/app/components/empty-state/empty-state.component';
+import { IgxModule } from 'src/app/shared/igx/igx.module';
 import { PokeApiService } from 'src/services/poke-api.service';
 import { StorageDeckService } from 'src/services/storage-deck.service';
 import { Deck } from 'src/types/pokemon-deck';
-import { DeckCardComponent } from '../components/deck-card/deck-card.component';
-import { EmptyStateComponent } from '../components/empty-state/empty-state.component';
-import { IgxModule } from '../shared/igx/igx.module';
 
 @Component({
   selector: 'app-list-decks',
