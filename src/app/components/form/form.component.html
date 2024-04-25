@@ -1,4 +1,3 @@
-
 <div class="w-full flex flex-row max-sm:flex-col max-sm:gap-8 gap-4">
   <div class="w-full flex flex-col items-start">
     <igx-input-group style="width: 100%">
@@ -41,7 +40,9 @@
       igxRipple
       igxButtonColor="black"
       [disabled]="!deckName || deckName.length < 1"
-      [style]="!deckName || deckName.length < 1 ? 'color: #87878c;' : 'color: #585fcc;'"
+      [style]="
+        !deckName || deckName.length < 1 ? 'color: #87878c;' : 'color: #585fcc;'
+      "
       (click)="saveDeck()"
       class="custom p-8 text-xl max-sm:w-full"
     >

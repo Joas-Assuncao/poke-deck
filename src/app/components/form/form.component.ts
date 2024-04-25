@@ -1,13 +1,13 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { IgxModule } from 'src/app/shared/igx/igx.module';
 import { FormsModule } from '@angular/forms';
+import { IgxModule } from 'src/app/shared/igx/igx.module';
 
 @Component({
   selector: 'app-form',
   standalone: true,
   imports: [IgxModule, FormsModule],
   templateUrl: './form.component.html',
-  styleUrls: ['./form.component.css']
+  styleUrls: ['./form.component.css'],
 })
 export class FormComponent {
   @Input() deckName!: string;
