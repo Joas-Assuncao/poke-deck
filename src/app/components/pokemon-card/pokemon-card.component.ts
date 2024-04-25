@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { IgxModule } from 'src/app/shared/igx/igx.module';
 import { PokemonCard } from 'src/types/pokemon-api';

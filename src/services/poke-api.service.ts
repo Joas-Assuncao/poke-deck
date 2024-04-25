@@ -37,10 +37,6 @@ export class PokeApiService {
       .pipe(
         debounceTime(500),
         map((response) => {
-          const justId = response.data.map((card) => card.id);
-          const set = new Set(justId);
-          console.log(set.size, justId.length);
-
           return response.data.map((card) => ({ ...card, added: false }));
         })
       );

@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { IgxToastComponent } from 'igniteui-angular';
 import { FormComponent } from 'src/app/components/form/form.component';
@@ -19,6 +20,7 @@ import { Deck } from 'src/types/pokemon-deck';
     FormComponent,
     LoaderComponent,
     RouterLink,
+    FormsModule,
   ],
   providers: [PokeApiService],
   templateUrl: './create-deck.component.html',
@@ -194,5 +196,9 @@ export class CreateDeckComponent implements OnInit {
     } else if (card.supertype === 'Trainer') {
       this.trainers--;
     }
+  }
+
+  changeDeckName(event: string) {
+    this.deckName = event;
   }
 }

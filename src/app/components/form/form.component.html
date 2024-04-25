@@ -8,6 +8,7 @@
         [disabled]="hasCard"
         class="disabled:text-gray-500"
         [(ngModel)]="deckName"
+        (ngModelChange)="changeDeckName($event)"
       />
       <label igxLabel for="deckName">Nome do baralho</label>
     </igx-input-group>

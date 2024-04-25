@@ -15,6 +15,7 @@ export class FormComponent {
 
   @Output() onFindPokemon = new EventEmitter<Event>();
   @Output() onSaveDeck = new EventEmitter<void>();
+  @Output() onChangeDeckName = new EventEmitter<string>();
 
   findPokemon(event: Event) {
     this.onFindPokemon.emit(event);
@@ -22,5 +23,10 @@ export class FormComponent {
 
   saveDeck() {
     this.onSaveDeck.emit();
+  }
+
+  changeDeckName(event: string) {
+    this.deckName = event;
+    this.onChangeDeckName.emit(event);
   }
 }
